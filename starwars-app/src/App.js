@@ -80,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
+        <audio src="/assets/star-wars-theme.mp3" autoPlay loop/>
         <StarWars/>
       </header>
     </div>
