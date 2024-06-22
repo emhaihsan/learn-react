@@ -1,12 +1,14 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+
 // import Item from './MyItem';
 
-class FilmIterRow extends React.Component {
+
+class AffiliationsIterRow extends React.Component {
   render(){
     return (
-      <li><a href={this.props.url}>{this.props.url}</a></li>
+      <li>{this.props.url}</li>
     )
   }
 }
@@ -14,11 +16,14 @@ class StarWars extends React.Component {
   constructor(){
     super()
     this.state = {
+      welcomePage: true,
       loadCharacter: false,
       name: null,
       height: null,
       homeworld: null,
-      films: [],
+      image: null,
+      wiki: null,
+      affiliations: [],
     }
   }
   getNewCharacter() {
@@ -28,28 +33,36 @@ class StarWars extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
+        welcomePage: false,
         name: data.name,
         height: data.height,
         homeworld: data.homeworld,
-        films: data.films,
+        affiliations: data.affiliations,
+        image: data.image,
+        wiki: data.wiki,
         loadCharacter: true
       })
     })
   }
   render() {
-    const movies = this.state.films.map((url, index) => {
-      return <FilmIterRow key={index} url={url}/>
+    const affiliations = this.state.affiliations.map((url, index) => {
+      return <AffiliationsIterRow key={index} url={url}/>
     })
     return (
       <div>
         {
+          this.state.welcomePage && 
+          <h1>Welcome to Star Wars Characters</h1>
+        }
+        {
           this.state.loadCharacter && 
           <div>
-            <h1>{this.state.name}</h1>
-            <p>{this.state.height} cm</p>
-            <p><a href={this.state.homeworld}>Homeworld: </a></p>
+            <img src={this.state.image} height={200} alt={this.state.name}/>
+            <h1><a href={this.state.wiki}>{this.state.name}</a></h1>
+            <p>Height:<br></br>{this.state.height} m</p>
+            <p>Homeworld:<br></br>{this.state.homeworld}</p>
             <ul>
-              {movies}
+            Affiliations:{affiliations}
             </ul>
           </div>
         }
@@ -67,6 +80,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        
         <StarWars/>
       </header>
     </div>
