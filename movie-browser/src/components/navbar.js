@@ -4,8 +4,14 @@ const Navbar = ({searchText, setSearchText}) =>{
   const navigate = useNavigate();
 
   const updateSearchText = (event) => {
+    event.preventDefault();
     navigate('/search')
    setSearchText(event.target.value);
+  }
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    navigate('/search')
   }
     return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,7 +33,7 @@ const Navbar = ({searchText, setSearchText}) =>{
             <Link className="nav-link disabled" aria-disabled="true" to="/">Coming Soon</Link>
           </li>
         </ul>
-        <form className="d-flex" role="search">
+        <form className="d-flex" role="search" onSubmit={handleSearchSubmit}>
           <input 
           className="form-control me-2" 
           type="search" 

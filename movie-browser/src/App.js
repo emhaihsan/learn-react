@@ -6,6 +6,7 @@ import AboutView from './components/about';
 import SearchView from './components/search';
 import MovieView from './components/movie'
 import {Routes, Route} from 'react-router-dom';
+import NotFound from './components/notfound';
 
 const apiKey = process.env.REACT_APP_MOVIE_DB_API_KEY;
 
@@ -35,6 +36,8 @@ function App() {
       <Route path="/search" element={<SearchView keyword={searchText} searchResults={searchResults}/>} >
       </Route>
       <Route path="/movies/:id" element={<MovieView/>} >
+      </Route>
+      <Route path="*" element={<NotFound/>} >
       </Route>
       </Routes>
     </div>
